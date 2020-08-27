@@ -1,6 +1,8 @@
 package com.das.javacore;
 
 import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.Test;
 
@@ -30,7 +32,7 @@ public class AppTest
         Optional<String> optional = list.stream().findAny();
 
        assertTrue(optional.isPresent());
-//       assertThat(optional.get(), anyOf(is("First"),is("First"),is("First"),is("First")));
+       assertThat(optional.get(), anyOf(is("First"),is("Second"),is("Third"),is("Fourth")));
 
         Optional<String> optionalFindFirst = list.stream().findFirst();
 
