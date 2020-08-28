@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class StreamsTest
 {
     /**
      * Rigorous Test :-)
@@ -31,7 +31,9 @@ public class AppTest
         list.stream().filter(Predicate.isEqual("A")).forEach(System.out::println);
         Optional<String> optional = list.stream().findAny();
 
+        //Test if the result is not empty
        assertTrue(optional.isPresent());
+       //Test if the result has any one value of the items in the list
        assertThat(optional.get(), anyOf(is("First"),is("Second"),is("Third"),is("Fourth")));
 
         Optional<String> optionalFindFirst = list.stream().findFirst();
