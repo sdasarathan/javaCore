@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -64,5 +65,16 @@ public class StreamsTest {
         list = Arrays.asList("First", "Second", "Third", "Fourth", "Fourth");
         Set set = list.stream().collect(Collectors.toSet());
         assertEquals(set.stream().count(), 4);
+    }
+
+    /**
+     * Average the elements in a collection
+     */
+    @Test
+    public void testAverageUsingCollector() {
+        list = Arrays.asList("2", "2", "3", "4", "4");
+        ToIntFunction<String> toIntFunction = x -> Integer.parseInt(x);
+        list.stream().collect(Collectors.averagingInt(toIntFunction));
+        assertEquals(list.stream().collect(Collectors.averagingInt(toIntFunction)), Double.valueOf(3));
     }
 }
