@@ -28,6 +28,10 @@ public class StreamsTest {
         list = Arrays.asList("First", "Second", "Third", "Fourth");
     }
 
+    /*
+    Find any item in the list.
+    In a non-parallel operation, it will most likely return the first element in the Stream but there is no guarantee for this.
+     */
     @Test
     public void testFindAny() {
 
