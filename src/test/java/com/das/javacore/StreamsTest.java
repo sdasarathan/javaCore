@@ -1,5 +1,6 @@
 package com.das.javacore;
 
+import org.hamcrest.collection.IsMapContaining;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -83,14 +84,17 @@ public class StreamsTest {
     }
 
     /*
-    Grouping in Streams
+    Grouping the items in list using Streams
      */
     @Test
     public void test() {
         List<Employee> employees = List.of(new Employee("Bob", 29), new Employee("Alice", 20), new Employee("John", 29));
 
-       Map groupedMap = employees.stream().collect(Collectors.groupingBy(e -> e.age));
+       Map<Object, List<Employee>> groupedMap = employees.stream().collect(Collectors.groupingBy(e -> e.age));
        groupedMap.forEach((age, e) -> System.out.println( "age" + age + ":" + "Employee" + e));
+       assertThat(groupedMap.size(),is(2));
+       assertThat(groupedMap, IsMapContaining.hasKey(20));
+       groupedMap.keySet().forEach(System.out::println);
     }
 
     class Employee{
