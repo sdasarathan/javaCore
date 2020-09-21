@@ -3,13 +3,13 @@ package com.das.javacore;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.time.temporal.Temporal;
+import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anyOf;
@@ -72,9 +72,51 @@ public class StreamsTest {
      */
     @Test
     public void testAverageUsingCollector() {
-        list = Arrays.asList("2", "2", "3", "4", "4");
+        list = Arrays.asList("2", "2", "4", "4");
         ToIntFunction<String> toIntFunction = x -> Integer.parseInt(x);
         list.stream().collect(Collectors.averagingInt(toIntFunction));
         assertEquals(list.stream().collect(Collectors.averagingInt(toIntFunction)), Double.valueOf(3));
+    }
+
+    /*
+    Grouping in Streams
+     */
+    @Test
+    public void test() {
+        List<Employee> employees = List.of(new Employee("Bob", 29), new Employee("Alice", 20), new Employee("John", 29));
+
+       Map groupedMap = employees.stream().collect(Collectors.groupingBy(e -> e.age));
+       groupedMap.forEach((age, e) -> System.out.println( "age" + age + ":" + "Employee" + e));
+    }
+
+    class Employee{
+        String name;
+        int age;
+
+        public Employee(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 }
