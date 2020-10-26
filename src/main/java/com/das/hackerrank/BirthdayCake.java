@@ -30,9 +30,9 @@ public class BirthdayCake {
     public static int birthdayCakeCandles(List<Integer> candles) {
         Map<Integer, Long> frequencies = candles.stream().collect(Collectors.groupingBy(integer -> integer, Collectors.counting()));
         Integer value = frequencies.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).findFirst().get().getKey();
-        System.out.println(value);
+        System.out.println(frequencies.get(value));
 
-        return value;
+        return frequencies.get(value).intValue();
     }
 
 }
